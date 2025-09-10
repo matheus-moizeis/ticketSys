@@ -1,0 +1,15 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net9.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="../TicketSys.Application/TicketSys.Application.csproj" />
+    <ProjectReference Include="../TicketSys.Domain/TicketSys.Domain.csproj" />
+    <ProjectReference Include="../TicketSys.Infra.Data/TicketSys.Infra.Data.csproj" />
+  </ItemGroup>
+
+</Project>
