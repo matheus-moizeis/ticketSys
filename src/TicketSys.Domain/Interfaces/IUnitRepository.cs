@@ -5,8 +5,8 @@ namespace TicketSys.Domain.Interfaces;
 public interface IUnitRepository
 {
     Task<IEnumerable<Unit>> GetAllAsync();
-    Task<Unit> GetByIdAsync(int id);
-    Task AddAsync(Unit unit);
-    Task UpdateAsync(Unit unit);
-    Task DeleteAsync(int id);
+    Task<Unit?> GetByIdAsync(int? id);
+    Task<Unit> CreateAsync(Unit unit);
+    Task<Unit> UpdateAsync(Unit unit);
+    Task<bool> DeleteAsync(int id);
 }
