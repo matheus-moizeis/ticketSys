@@ -12,4 +12,8 @@
     <ProjectReference Include="../TicketSys.Infra.Data/TicketSys.Infra.Data.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <PackageReference Include="AutoMapper" Version="15.0.1" />
+  </ItemGroup>
+
 </Project>
