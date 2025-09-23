@@ -10,4 +10,11 @@
     <ProjectReference Include="../TicketSys.Infra.IoC/TicketSys.Infra.IoC.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="wwwroot/lib/datatables/i18n/" />
+    <Folder Include="wwwroot/lib/sweetalert2/" />
+    <Folder Include="wwwroot/lib/sweetalert2/css/" />
+    <Folder Include="wwwroot/lib/sweetalert2/js/" />
+  </ItemGroup>
+
 </Project>
