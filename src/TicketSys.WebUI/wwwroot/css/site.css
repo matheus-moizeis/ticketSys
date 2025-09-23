@@ -1,5 +1,6 @@
 html {
   font-size: 14px;
+  height: 100%; /* garante altura total */
 }
 
 @media (min-width: 768px) {
@@ -8,24 +9,17 @@ html {
   }
 }
 
-.btn:focus, .btn:active:focus, .btn-link.nav-link:focus, .form-control:focus, .form-check-input:focus {
-  box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
+body {
+  min-height: 100%;      /* corpo ocupa tela inteira */
+  display: flex;         
+  flex-direction: column;
+  margin: 0;             /* remove margem extra */
 }
 
-html {
-  position: relative;
-  min-height: 100%;
+main {
+  flex: 1; /* ocupa o espaço restante, empurrando o footer */
 }
 
 body {
-  margin-bottom: 60px;
-}
-
-.form-floating > .form-control-plaintext::placeholder, .form-floating > .form-control::placeholder {
-  color: var(--bs-secondary-color);
-  text-align: end;
-}
-
-.form-floating > .form-control-plaintext:focus::placeholder, .form-floating > .form-control:focus::placeholder {
-  text-align: start;
+    background-color: #e9ecef; /* cinza claro do Bootstrap */
 }
