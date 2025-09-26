@@ -71,6 +71,21 @@
         </main>
     </div>
 
+    <!-- Mensagem Carregando -->
+    <div id="processingModal" class="modal fade" tabindex="-1" data-bs-backdrop="static" data-bs-keyboard="false">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content border-0 shadow-lg rounded-3">
+                <div class="modal-body text-center p-5">
+                    <div class="spinner-border text-primary" style="width: 3rem; height: 3rem;" role="status">
+                        <span class="visually-hidden">Carregando...</span>
+                    </div>
+                    <h5 class="mt-4 fw-semibold">Processando solicitação...</h5>
+                    <p class="text-muted mb-0">Por favor, aguarde um momento.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <!-- Footer -->
     <footer class="bg-light border-top text-center py-3 mt-auto">
         <div class="container">
@@ -84,6 +99,8 @@
     <script src="~/lib/datatables/js/datatables.js"></script>
     <script src="~/lib/sweetalert2/js/sweetalert2.min.js"></script>
     <script src="~/lib/toastr/js/toastr.min.js"></script>
+    <script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
+    <script src="~/lib/jquery-ajax-unotruvise/dist/jquery.unobtrusive-ajax.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
     @await RenderSectionAsync("Scripts", required: false)
 </body>
