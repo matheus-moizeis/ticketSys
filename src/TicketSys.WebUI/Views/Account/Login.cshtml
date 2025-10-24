@@ -1,0 +1,45 @@
+@model TicketSys.Application.DTOs.LoginDTO
+@{
+    Layout = "_LayoutSimple";
+}
+
+<div class="container d-flex justify-content-center align-items-center login-container">
+    <div class="card shadow p-4" style="width: 100%; max-width: 400px;">
+        <h3 class="text-center mb-4">Login</h3>
+        <form class="form-group" asp-controller="Account" asp-action="Login" method="post">
+            @Html.AntiForgeryToken()
+            <input type="hidden" asp-for="ReturnUrl" />
+
+            <div class="alert alert-danger" role="alert"
+                style="display:@(ViewData.ModelState.ErrorCount > 0 ? "block" : "none")">
+                <button type="button" class="btn-close float-end" data-bs-dismiss="alert" aria-label="Close"></button>
+                @Html.ValidationSummary(false)
+            </div>
+            <div class="mb-3">
+                <label asp-for="Email" class="form-label">E-mail</label>
+                <input asp-for="Email" type="email" class="form-control" id="email" placeholder="Digite seu e-mail"
+                    required>
+                <span asp-validation-for="Email" class="text-danger"></span>
+            </div>
+            <div class="mb-3">
+                <label asp-for="Password" class="form-label">Senha</label>
+                <input asp-for="Password" type="password" class="form-control" placeholder="Digite sua senha" required>
+                <span asp-validation-for="Password" class="text-danger"></span>
+            </div>
+            <div class="d-grid">
+                <button type="submit" class="btn btn-primary">Entrar</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}
+<style>
+    .login-container {
+        height: 100vh;
+    }
+</style>

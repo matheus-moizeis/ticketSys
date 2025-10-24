@@ -5,7 +5,8 @@
 
 <div class="bg-light p-3 rounded shadow-sm">
     <h2>Criar Unidade</h2>
-    <form class="form-group" asp-action="Create" method="post">
+    <form asp-action="Create" method="post" class="form-group">
+        @Html.AntiForgeryToken()
         <div class="mb-3">
             <label asp-for="Name" class="form-label"></label>
             <input asp-for="Name" class="form-control" />
@@ -24,11 +25,11 @@
 @section Scripts {
     <script>
         document.querySelector('form').addEventListener('submit', function () {
-           showProcessing()
+            showProcessing()
         });
 
         window.addEventListener('pageshow', function () {
             hideProcessing();
         });
     </script>
-} 
+}

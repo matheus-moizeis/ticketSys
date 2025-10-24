@@ -1,0 +1,63 @@
+﻿@model TicketSys.WebUI.ViewModels.AccountViewModel
+
+@{
+    ViewData["Title"] = "Editar Usuário";
+}
+
+
+<div class="bg-light p-3 rounded shadow-sm">
+    <h2>Editar Usuário</h2>
+    <form action="Register" method="post">
+        @Html.AntiForgeryToken()
+        @Html.HiddenFor(model => model.Id)
+        <div class="mb-3">
+            <label asp-for="Name" class="form-label"></label>
+            <input asp-for="Name" class="form-control" />
+            <span asp-validation-for="Name" class="text-danger"></span>
+        </div>
+        <div class="mb-3">
+            <label asp-for="Email" class="form-label"></label>
+            <input asp-for="Email" class="form-control" />
+            <span asp-validation-for="Email" class="text-danger"></span>
+        </div>
+        <div class="mb-3">
+            <label asp-for="Password" class="form-label"></label>
+            <input asp-for="Password" class="form-control" />
+            <span asp-validation-for="Password" class="text-danger"></span>
+        </div>
+
+        <div class="mb-3">
+            <label asp-for="SelectedTypeOfAccountId" class="form-label"></label>
+            <select asp-for="SelectedTypeOfAccountId"
+                asp-items="@(new SelectList(Model.TypesOfAccount, "Id", "Description", Model.SelectedTypeOfAccountId))"
+                class="form-select">
+                <option value="">-- Selecione --</option>
+            </select>
+            <span asp-validation-for="SelectedTypeOfAccountId" class="text-danger"></span>
+        </div>
+
+        <div class="mb-3 form-check">
+            <input asp-for="IsActive" class="form-check-input" />
+            <label asp-for="IsActive" class="form-check-label"></label>
+        </div>
+
+        <button type="submit" class="btn btn-primary"><i class="bi bi-save"></i> Salvar</button>
+        <a asp-controller="Account" asp-action="Users" class="btn btn-secondary"><i class="bi bi-x-circle"></i>
+            Voltar</a>
+    </form>
+</div>
+
+
+
+
+@section Scripts {
+    <script>
+        document.querySelector('form').addEventListener('submit', function () {
+            showProcessing()
+        });
+
+        window.addEventListener('pageshow', function () {
+            hideProcessing();
+        });
+    </script>
+}

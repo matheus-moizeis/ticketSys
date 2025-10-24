@@ -1,9 +1,11 @@
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using TicketSys.Application.DTOs;
 using TicketSys.Application.Interfaces;
 
 namespace TicketSys.WebUI.Controllers
 {
+    [Authorize]
     public class UnitController(IUnitService unitService) : Controller
     {
         private readonly IUnitService _unitService = unitService;
@@ -16,7 +18,7 @@ namespace TicketSys.WebUI.Controllers
         }
 
 
-        [HttpGet()]
+        [HttpGet]
         public IActionResult Create()
         {
             return View();

@@ -40,11 +40,6 @@
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" asp-controller="Unit" asp-action="Index">
-                                <i class="bi bi-building"></i> Unidades
-                            </a>
-                        </li>
-                        <li class="nav-item">
                             <a class="nav-link" asp-controller="WorkQueue" asp-action="Index">
                                 <i class="bi bi-clipboard-check"></i> Fila de Trabalho
                             </a>
@@ -54,6 +49,19 @@
                                 <i class="bi bi-bar-chart-line"></i> Relatórios
                             </a>
                         </li>
+                        @if (User.IsInRole("Admin"))
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link" asp-controller="Account" asp-action="Users">
+                                    <i class="bi bi-people"></i> Usuários
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" asp-controller="Unit" asp-action="Index">
+                                    <i class="bi bi-building"></i> Unidades
+                                </a>
+                            </li>
+                        }
                     </ul>
                     <div class="d-flex">
                         <a class="btn btn-outline-light btn-sm" asp-controller="Account" asp-action="Logout">

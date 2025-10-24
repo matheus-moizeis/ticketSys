@@ -1,3 +1,4 @@
+using TicketSys.Domain.Account;
 using TicketSys.Infra.IoC;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -20,6 +21,9 @@ if (!app.Environment.IsDevelopment())
 app.UseHttpsRedirection();
 app.UseRouting();
 
+SeedUserRoles(app);
+
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapStaticAssets();
@@ -31,3 +35,13 @@ app.MapControllerRoute(
 
 
 app.Run();
+
+
+static void SeedUserRoles(IApplicationBuilder app)
+{
+    using var serviceScope = app.ApplicationServices.CreateScope();
+    var seed = serviceScope.ServiceProvider
+                           .GetService<ISeedUserRoleInitial>();
+    seed!.SeedRoles();
+    seed!.SeedUsers();
+}
