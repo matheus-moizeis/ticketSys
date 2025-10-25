@@ -9,19 +9,9 @@ public class ApplicationDbContextFactory : IDesignTimeDbContextFactory<Applicati
 {
     public ApplicationDbContext CreateDbContext(string[] args)
     {
-        // Caminho base do projeto onde está o appsettings.json
-        // var basePath = Directory.GetCurrentDirectory();
-
-        // Carrega a configuração
-        // var configuration = new ConfigurationBuilder()
-        //     .SetBasePath(basePath)
-        //     .AddJsonFile("appsettings.json", optional: false)
-        //     .Build();
-
-        // var connectionString = configuration.GetConnectionString("DefaultConnection");
-
+        var envConnectionString = Environment.GetEnvironmentVariable("DB_CONNECTION");
         var optionsBuilder = new DbContextOptionsBuilder<ApplicationDbContext>();
-        optionsBuilder.UseNpgsql("string de conexão aqui",
+        optionsBuilder.UseNpgsql(envConnectionString,
             b => b.MigrationsAssembly(typeof(ApplicationDbContext).Assembly.FullName));
 
         return new ApplicationDbContext(optionsBuilder.Options);

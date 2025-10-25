@@ -1,4 +1,3 @@
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Identity;
 using TicketSys.Domain.Account;
 
@@ -14,50 +13,56 @@ public class SeedUserRoleInitial(
 
     public void SeedUsers()
     {
-        if (_userManager.FindByEmailAsync("usuario@localhost").Result == null)
+        var emailSolicitor = Environment.GetEnvironmentVariable("USER_SOLICITOR_DEFAULT_EMAIL")?.ToString();
+        if (_userManager.FindByEmailAsync(emailSolicitor!).Result == null)
         {
             ApplicationUser user = new()
             {
-                UserName = "usuario@localhost",
-                Email = "usuario@localhost",
-                NormalizedUserName = "USUARIO@LOCALHOST",
-                NormalizedEmail = "USUARIO@LOCALHOST",
+                UserName = emailSolicitor,
+                Email = emailSolicitor,
+                NormalizedUserName = emailSolicitor!.ToUpper(),
+                NormalizedEmail = emailSolicitor!.ToUpper(),
                 EmailConfirmed = true,
                 LockoutEnabled = false,
-                SecurityStamp = Guid.NewGuid().ToString()
+                SecurityStamp = Guid.NewGuid().ToString(),
+                Name = Environment.GetEnvironmentVariable("USER_SOLICITOR_DEFAULT_NAME")?.ToString(),
+                IsActive = true
             };
 
-            var result = _userManager.CreateAsync(user, "Numsey#2024").Result;
+            var result = _userManager.CreateAsync(user, Environment.GetEnvironmentVariable("USER_SOLICITOR_DEFAULT_PASSWORD")!.ToString()).Result;
 
             if (result.Succeeded)
             {
                 _userManager.AddToRoleAsync(user, "Solicitante").Wait();
             }
 
+            var emailAdmin = Environment.GetEnvironmentVariable("USER_ADMIN_DEFAULT_EMAIL")?.ToString();
+
             ApplicationUser adm = new()
             {
-                UserName = "usuario@localhost",
-                Email = "usuario@localhost",
-                NormalizedUserName = "USUARIO@LOCALHOST",
-                NormalizedEmail = "USUARIO@LOCALHOST",
+                UserName = emailAdmin,
+                Email = emailAdmin,
+                NormalizedUserName = emailAdmin!.ToUpper(),
+                NormalizedEmail = emailAdmin!.ToUpper(),
                 EmailConfirmed = true,
                 LockoutEnabled = false,
-                SecurityStamp = Guid.NewGuid().ToString()
+                SecurityStamp = Guid.NewGuid().ToString(),
+                Name = Environment.GetEnvironmentVariable("USER_ADMIN_DEFAULT_NAME")?.ToString(),
+                IsActive = true
             };
 
-            result = _userManager.CreateAsync(user, "Numsey#2024").Result;
+            result = _userManager.CreateAsync(adm, Environment.GetEnvironmentVariable("USER_ADMIN_DEFAULT_PASSWORD")!.ToString()).Result;
 
             if (result.Succeeded)
             {
-                _userManager.AddToRoleAsync(user, "Admin").Wait();
+                _userManager.AddToRoleAsync(adm, "Admin").Wait();
             }
-
-
         }
     }
 
     public void SeedRoles()
     {
+
         if (!_roleManager.RoleExistsAsync("Admin").Result)
         {
             IdentityRole role = new()
@@ -66,7 +71,7 @@ public class SeedUserRoleInitial(
                 NormalizedName = "ADMIN"
             };
 
-            var roleResult = _roleManager.CreateAsync(role).Result;
+            _ = _roleManager.CreateAsync(role).Result;
         }
 
         if (!_roleManager.RoleExistsAsync("Solicitante").Result)
@@ -77,9 +82,7 @@ public class SeedUserRoleInitial(
                 NormalizedName = "SOLICITANTE"
             };
 
-            var roleResult = _roleManager.CreateAsync(role).Result;
+            _ = _roleManager.CreateAsync(role).Result;
         }
     }
-
-
 }

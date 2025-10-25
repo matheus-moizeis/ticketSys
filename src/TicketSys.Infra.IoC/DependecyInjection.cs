@@ -18,8 +18,9 @@ public static class DependecyInjection
 {
     public static IServiceCollection AddInfrastructure(this IServiceCollection services, IConfiguration configuration)
     {
+        var envConnectionString = Environment.GetEnvironmentVariable("DB_CONNECTION");
         services.AddDbContext<ApplicationDbContext>(options =>
-            options.UseNpgsql(configuration.GetConnectionString("DefaultConnection"),
+            options.UseNpgsql(envConnectionString,
             b => b.MigrationsAssembly(typeof(ApplicationDbContext).Assembly.FullName))
             );
 
