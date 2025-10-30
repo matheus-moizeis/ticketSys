@@ -34,6 +34,9 @@ public static class DependecyInjection
             .AddEntityFrameworkStores<ApplicationDbContext>()
             .AddDefaultTokenProviders();
 
+        services.AddHttpContextAccessor();
+
+
         services.AddScoped<IUnitRepository, UnitRepository>();
         services.AddScoped<IUnitService, UnitService>();
         services.AddScoped<IAuthenticate, AuthenticateService>();

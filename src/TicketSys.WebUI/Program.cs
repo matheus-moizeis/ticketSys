@@ -1,6 +1,8 @@
 using DotNetEnv;
+using TicketSys.Application.Interfaces;
 using TicketSys.Domain.Account;
 using TicketSys.Infra.IoC;
+using TicketSys.WebUI.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -10,6 +12,9 @@ Env.Load();
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 builder.Services.AddInfrastructure(builder.Configuration);
+
+builder.Services.AddHttpContextAccessor();
+builder.Services.AddScoped<IUserContextService, UserContextService>();
 
 var app = builder.Build();
 

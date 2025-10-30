@@ -6,10 +6,11 @@ using TicketSys.Domain.Interfaces;
 
 namespace TicketSys.Application.Services;
 
-public class UnitService(IUnitRepository unitRepository, IMapper mapper) : IUnitService
+public class UnitService(IUnitRepository unitRepository, IMapper mapper, IUserContextService userContextService) : IUnitService
 {
     private readonly IUnitRepository _unitRepository = unitRepository;
     private readonly IMapper _mapper = mapper;
+    private readonly IUserContextService _userContextService = userContextService;
 
     public async Task<IEnumerable<UnitDTO>> GetAllUnits()
     {
