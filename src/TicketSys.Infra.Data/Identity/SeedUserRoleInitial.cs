@@ -84,5 +84,15 @@ public class SeedUserRoleInitial(
 
             _ = _roleManager.CreateAsync(role).Result;
         }
+        if (!_roleManager.RoleExistsAsync("Executor").Result)
+        {
+            IdentityRole role = new()
+            {
+                Name = "Executor",
+                NormalizedName = "EXECUTOR"
+            };
+
+            _ = _roleManager.CreateAsync(role).Result;
+        }
     }
 }
